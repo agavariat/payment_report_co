@@ -2,16 +2,18 @@
 <odoo>
 	<data>
 		<template id="payment_receipt_inherit" inherit_id="account.report_payment_receipt_document">
-			<xpath expr="//div[@class='page']" position="replace">
+						<xpath expr="//div[@class='page']" position="replace">
 			<div class="page">
 			  <div class="container">
 				<div class="row" style="border:1px solid black">
 					<div class="col-6" style="border-left:1px solid black">
-						<t t-if="o.partner_type == 'customer'">
-		                	<h5><strong>COMPROBANTE DE INGRESO: <span style="text-center" t-field="o.name"/></strong></h5> 
+						      <t t-if="o.partner_type == 'customer'">
+		                	<h5><strong>COMPROBANTE DE INGRESO</strong></h5>
+		            	<strong><h7>RECIBO DE CAJA No.: <span style="text-center" t-field="o.name"/></h7></strong>
 		            	</t>
 		            	<t t-if="o.partner_type == 'supplier'">
-		                	<h5><strong>COMPROBANTE DE EGRESO: <span style="text-center" t-field="o.name"/></strong></h5>
+		                	<h5><strong>COMPROBANTE DE EGRESO</strong></h5>
+		            	<strong><h7>EGRESO No.: <span style="text-center" t-field="o.name"/></h7></strong>
 		            	</t>
 	            	</div>
 					<div class="col-6">
@@ -42,7 +44,7 @@
                     <div class="col-6">
                         <t t-if="o.payment_method_id"><strong>METODO DE PAGO: </strong><span t-field="o.journal_id"/></t>
                        <div t-if="o.amount">
-                        <strong>CANTIDAD A PAGAR: </strong><span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                        <strong>CANTIDAD PAGADA: </strong><span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                      </div>
                      <t t-if="o.partner_type == 'supplier'">
                     <div t-if="o.communication">
@@ -80,6 +82,7 @@
                             <td class="text-right"><span t-field="inv.amount_total"/></td>
                             <td class="text-right"><span t-esc="o._get_invoice_payment_amount(inv)" t-options="{'widget': 'monetary', 'display_currency': inv.currency_id}"/></td>
                             <td class="text-right"><span t-field="inv.residual"/></td>
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -87,7 +90,7 @@
                 </div>
                 <div class="row" style="border:1px solid black;margin-top:10px">
                   <div class="col-12">
-            	<b>VALOR EN LETRAS: </b><span style="text-transform: uppercase" t-esc="o.currency_id.amount_to_text(o.amount)"/> 
+            	<b>VALOR EN LETRAS: </b><span style="text-transform: uppercase" t-esc="o.currency_id.amount_to_text(o.amount)"/>S
             </div>
             
             </div>
